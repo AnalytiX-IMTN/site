@@ -118,6 +118,42 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* --- NEW POPUP STYLES --- */
+        .popup-overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: var(--form-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+            color: var(--text);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .popup-content p {
+            font-size: 16px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .popup-content button {
+            width: auto;
+            padding: 10px 24px;
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -126,20 +162,28 @@
         <h2>Let's connect</h2>
         <p class="subtitle">Fill out the details below and we'll be in touch.</p>
         
-        <!-- Replace the action URL with your backend link in the next step -->
-        <form action="YOUR_BACKEND_URL_HERE" method="POST">
+        <!-- 
+          GOOGLE FORMS INTEGRATION PLACEHOLDER 
+          1. Replace action URL with your Google Form "formResponse" URL.
+          2. Update the "name" attributes below to match Google's "entry.123456" IDs.
+          3. Remove the JavaScript at the bottom once your backend is live.
+        -->
+        <form id="contactForm" action="YOUR_GOOGLE_FORM_URL_HERE" method="POST">
             <div class="input-group">
                 <label for="name">Full Name</label>
+                <!-- Placeholder name="entry.XXXXXX" -->
                 <input type="text" id="name" name="name" placeholder="John Doe" required>
             </div>
 
             <div class="input-group">
                 <label for="email">Email Address</label>
+                <!-- Placeholder name="entry.YYYYYY" -->
                 <input type="email" id="email" name="email" placeholder="john@example.com" required>
             </div>
 
             <div class="input-group">
                 <label for="service">What are you looking for?</label>
+                <!-- Placeholder name="entry.ZZZZZZ" -->
                 <select id="service" name="service" required>
                     <option value="" disabled selected hidden>Choose an option</option>
                     <option value="web-design">Web Design</option>
@@ -150,12 +194,32 @@
 
             <div class="input-group">
                 <label for="message">Message</label>
+                <!-- Placeholder name="entry.AAAAAA" -->
                 <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
             </div>
 
             <button type="submit">Submit Request</button>
         </form>
     </div>
+
+    <!-- --- NEW POPUP HTML --- -->
+    <div class="popup-overlay" id="statusPopup">
+        <div class="popup-content">
+            <p>Forms Currently not accepting responses.</p>
+            <button onclick="document.getElementById('statusPopup').style.display='none'">Close</button>
+        </div>
+    </div>
+
+    <!-- --- NEW JAVASCRIPT FOR POPUP --- -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            // Prevent the form from submitting normally
+            e.preventDefault(); 
+            
+            // Show the custom popup by changing its display style to flex
+            document.getElementById('statusPopup').style.display = 'flex';
+        });
+    </script>
 
 </body>
 </html>
