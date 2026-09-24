@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: Analytix-IMTN/site # e.g., analytix-imt/website
+  branch: main # The branch you want to update
+  
+# This is where your uploaded PDFs and images will go
+media_folder: "assets"
+public_folder: "assets"
+
+# This defines what your members can edit
+collections:
+  - name: "resources"
+    label: "Resources & Workshops"
+    folder: "_resources"
+    create: true
+    fields:
+      - {label: "Workshop Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "File Upload (PDF)", name: "file", widget: "file", allow_multiple: false}
