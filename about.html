@@ -275,5 +275,14 @@
             localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
         });
     </script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800, // Animation duration in milliseconds
+            once: true,    // Run the animation only once while scrolling down
+            offset: 100    // Trigger point
+        });
+    </script>
 </body>
 </html>
